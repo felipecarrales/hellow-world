@@ -1,0 +1,27 @@
+report z_class_fjch.
+
+class material definition.
+  public section.
+    data: matnr type matnr,
+          fecha_creacion type ersda.
+    methods: set_matnr importing i_matnr type matnr,
+             set_fecha_creacion importing i_fecha_creacion type ersda.
+endclass.
+
+class material implementation.
+  method set_matnr.
+    matnr = i_matnr.
+  endmethod.
+  method set_fecha_creacion.
+    fecha_creacion = i_fecha_creacion.
+  endmethod.
+endclass.
+
+start-of-selection.
+  data gr_material type REF TO material.
+  CREATE OBJECT gr_material.
+  gr_material->SET_MATNR( I_MATNR = '100'  ).
+  gr_material->SET_FECHA_CREACION( I_FECHA_CREACION = '01012017' ).
+*
+  write: / gr_material->matnr,
+           gr_material->fecha_creacion.
