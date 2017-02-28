@@ -1,0 +1,33 @@
+report z_class_fjch.
+*tipos de datos en clases
+
+CLASS cl_elementos DEFINITION.
+  PUBLIC SECTION.
+    types: BEGIN OF TYPES_ELEM_OBJETOS,
+       clase type string,
+       instancia type string,
+       referencia type string,
+     END OF TYPES_ELEM_OBJETOS.
+    data mi_objeto TYPE types_elem_objetos.
+    METHODs: set_mi_objeto IMPORTING mi_objeto type TYPES_ELEM_OBJETOS.
+ENDCLASS.
+
+CLASS cl_elementos IMPLEMENTATION.
+  METHOD set_mi_objeto.
+    me->mi_objeto = MI_OBJETO.
+  ENDMETHOD.
+ENDCLASS.
+
+START-OF-SELECTION.
+  DATA: gr_cl_elementos TYPE REF TO cl_elementos,
+        i_types_elem_objetos type cl_elementos=>types_elem_objetos.
+  CREATE OBJECT gr_cl_elementos.
+  i_types_elem_objetos-clase = 'Clase'.
+  i_types_elem_objetos-instancia = 'Instancia'.
+  i_types_elem_objetos-referencia = 'Referencia'.
+  gr_cl_elementos->SET_MI_OBJETO( MI_OBJETO = i_types_elem_objetos ).
+
+
+  Write:/ gr_cl_elementos->mi_objeto-Clase,
+        /  gr_cl_elementos->mi_objeto-instancia,
+        /  gr_cl_elementos->mi_objeto-referencia.
