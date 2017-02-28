@@ -1,0 +1,20 @@
+report z_class_fjch.
+*Constructor de instancia y constructor estatico
+CLASS producto DEFINITION.
+  PUBLIC SECTION.
+  METHODs: constructor.
+  CLASS-METHODS: class_constructor.
+ENDCLASS.
+
+CLASS producto IMPLEMENTATION.
+  METHOD constructor.
+    write:/ 'Metodo constructor de instancia'.
+  ENDMETHOD.
+  METHOD class_constructor.
+    WRITE:/ 'Metodo constructor estatico'.
+  ENDMETHOD.
+ENDCLASS.
+
+START-OF-SELECTION.
+DATA: gr_producto TYPE REF TO producto.
+CREATE OBJECT gr_producto.
