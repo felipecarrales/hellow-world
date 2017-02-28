@@ -1,0 +1,33 @@
+report z_class_fjch.
+*Metodos funcionales
+
+class comprobar DEFINITION.
+  PUBLIC SECTION.
+  METHODs: mcomprobar IMPORTING i_lifnr TYPE lifnr
+                      EXPORTING e_bol type c.
+ENDCLASS.
+
+CLASS comprobar IMPLEMENTATION.
+  METHOD mcomprobar.
+    data v_lifnr type lifnr.
+       select SINGLE lifnr into v_lifnr from LFA1
+         where lifnr = i_lifnr .
+         if sy-subrc = 0.
+           e_bol = 'X'.
+           else.
+           e_bol = ''.
+         ENDIF.
+  ENDMETHOD.
+ENDCLASS.
+
+START-OF-SELECTION.
+data: gv_comprobar TYPE REF TO comprobar,
+      lv_lifnr type lifnr.
+create OBJECT gv_comprobar.
+
+gv_comprobar->MCOMPROBAR(
+  exporting
+    I_LIFNR = '0000100000'
+  importing
+    E_BOL   =  lv_lifnr
+).
